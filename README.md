@@ -1,2 +1,1 @@
-# nuzar-cloud-doc
-wiki
+# docsify serve docs
