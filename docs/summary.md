@@ -1,24 +1,27 @@
 * 入门
   * [快速开始](guid/quickstart.md)
-  * [配置](zh-cn/more-pages.md)
+  * [配置](guid/config.md)
+  * [部署](guid/deploy.md)
 
 * 核心模块
-  * [权限](zh-cn/configuration.md)
-  * [回显](zh-cn/themes.md)
-  * [权限](zh-cn/plugins.md)
-  * [日志](zh-cn/markdown.md)
+  * [数据](core/data.md)
+  * [接口](core/api.md)
+  * [权限](core/permission.md)
+  * [回显](core/echo.md)
+  * [日志](core/log.md)
 
 * 设计模式
-  * [策略模式](zh-cn/configuration.md)
+  * [策略模式](biz/stratege.md)
 
 * 身份认证
-  * [前言](zh-cn/configuration.md)
-  * [应用](zh-cn/themes.md)
-  * [用户](zh-cn/plugins.md)
-  * [认证](zh-cn/markdown.md)
-  * [授权](zh-cn/language-highlight.md)
+  * [前言](auth/intro.md)
+  * [应用](auth/client.md)
+  * [用户](auth/user.md)
+  * [认证](auth/authentication.md)
+  * [授权](auth/authrization.md)
 
 * 扩展
-  * [Redis](zh-cn/configuration.md)
-  * [Nacos](zh-cn/themes.md)
-  * [Consul](zh-cn/plugins.md)
+  * [Redis](extend/redis.md)
+  * [Nacos](extend/nacos.md)
+  * [Consul](extend/consul.md)
+  * [Docker](extend/docker.md)

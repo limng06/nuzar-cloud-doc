@@ -1,0 +1,144 @@
+# 回显
+
+## nuzar-echo-starter
+
+## 配置
+
+默认echo为关闭状态需要手动打开
+
+本地缓存使用ThreadLocal配置，仅在线程中使用，可以通过EchoContextHolder上下文存储
+
+Redis缓存默认过期时间为300S，redis缓存默认启用
+
+```yml
+nuzar:
+  cloud:
+    echo:
+      enabled: true
+      redis:
+        expire: 300
+```
+
+回显功能用于填充和丰富接口返回数据，eg. Product默认返回brand字段，我们可以通过Echo回显功能将brand字段的值翻译为对应的中文名称，另外也
+可以通过此功能完成马赛克功能，默认提供手机号、身份证、密码、地址的马赛克功能
+
+* `@Echo`
+
+  标注需要回显的字段，默认提供两种模式，指定EchoService接口或者使用字典工厂DictDomain功能
+
+* `@EchoResult`
+  
+  标注指定的接口以标识该接口需要做回显填充
+
+添加 `Product.java`
+
+```java
+@Data
+@Table(name = "product")
+public class Product extends BaseEntity implements Serializable {
+    private static final long serialVersionUID = 1L;
+    /**
+     * 主键ID
+     */
+    @TableId
+    private String id;
+
+    /**
+     * 品牌
+     */
+    @Echo(echoService = BrandEchoService.class, ref = "brandName")
+    private String brand;
+
+    /**
+     * 品牌中文名
+     */
+    private String brandName;
+
+    /**
+     * 马赛克
+     */
+    @Echo(echoService = SensitiveEchoService.Phone.class)
+    private String phone;
+    /**
+     * 型号
+     */
+    @Echo(dictDomain = "brand")
+    private String model;
+    /**
+     * 序列号
+     */
+    private Integer serialNo;
+    /**
+     * 价格
+     */
+    private Integer price;
+}
+```
+
+添加 `BrandEchoService.java` 和它的实现类 `BrandEchoServiceImpl.java`
+
+```java BrandEchoService
+public interface BrandEchoService extends EchoService<String, String> {
+
+}
+```
+
+```java BrandEchoServiceImpl
+@Component
+public class BrandEchoServiceImpl implements BrandEchoService {
+    @Override
+    public String echo(String s) {
+        if ("nokia".equals(s)) {
+            return "诺基亚";
+        }
+        return "杂牌";
+    }
+}
+```
+
+添加 `ProductController.java`
+
+```java
+@RestController
+@RequestMapping("/product")
+public class ProductController {
+
+    @EchoResult
+    @RequestMapping(
+        value = {""},
+        method = {RequestMethod.GET}
+    )
+    public List<T> query(@QueryBody ProductQuery query) {
+        return this.getService().list(query.getQueryWrapper(this.getService().getEntityClass()));
+    }
+
+    /**
+     * 快速检索类
+     */
+    public static class ProductQuery extends QueryModel {
+        @QueryParam(filterType = QueryParam.FilterType.LIKE)
+        private String brand;
+    }
+}
+```
+
+## 扩展
+
+使用自定义 `DictFactory` 来实现自己的字典工厂，使得字典类型的翻译更加简单
+
+```java
+@Echo(dictDomain = "brand")
+private String model;
+```
+
+```java
+@Component
+public class DictFactoryImpl implements DictFactory<String, String> {
+    List<String> list = Arrays.asList("A", "B", "C", "D");
+
+    @Override
+    public String get(String s, String k) {
+        return list.get(RandomUtils.nextInt(0, 3));
+    }
+}
+```
