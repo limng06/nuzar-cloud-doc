@@ -21,6 +21,18 @@ public class ProductController extends CommonController<Product, ProductService,
 }
 ```
 
+## 接口规范
+
+关于接口返回类型大体分为三种`String`、`MassResult`、`<T>`自定义类型
+
+如果使用String类型返回，默认会走mvc模式，如果需要返回json格式，请指定`@GetMapping(value = "/string", produces = {"application/json"})`
+
+默认所有的其它非MassResult最后返回结果都会被封装为MassResult类型
+
+## 异常
+
+业务异常请继承BizException基类
+
 ## 构建说明
 
 框架默认提供了多个基础Controller类，大家可以自由组合使用

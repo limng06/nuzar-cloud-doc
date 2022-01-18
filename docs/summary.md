@@ -9,6 +9,7 @@
   * [权限](core/permission.md)
   * [回显](core/echo.md)
   * [日志](core/log.md)
+  * [断路器](core/circuitbreaker.md)
 
 * 设计模式
   * [策略模式](biz/stratege.md)

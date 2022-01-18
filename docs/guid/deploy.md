@@ -73,10 +73,9 @@ ENTRYPOINT [ "sh", "-c","java $PROFILES_OPTS  -jar /${project.artifactId}.jar"]
 </build>
 ```
 
-* 生成镜像
+* 生成镜像 创建deploy.bat 内容如下
 
-mvn run docker:build -f pom.xml
-
-* 推送到私服
-
-mvn run docker:push -f pom.xml
+@echo off
+call mvn install
+call mvn docker:build -f pom.xml
+call mvn docker:push -f pom.xml
