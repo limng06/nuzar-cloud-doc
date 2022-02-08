@@ -28,8 +28,5 @@
   * [Docker](extend/docker.md)
 
 * DOCKER_STACK
-  * [Redis](stack/oauth2.md)
-  * [Redis](stack/redis.md)
-  * [Nacos](stack/nacos.md)
-  * [Consul](stack/consul.md)
-  * [Docker](stack/docker.md)
+  * [OAuth2](stack/oauth2.md)
+  * [Portainer](stack/portainer.md)
