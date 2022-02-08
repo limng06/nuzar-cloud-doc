@@ -10,6 +10,10 @@
 
 ## 更新
 
+* 2022-02-28
+
+添加CommonJoinMapper
+
 * 2022-01-18
 
 更新CircuitBreaker(resilience4j)模块，添加默认配置

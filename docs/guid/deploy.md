@@ -14,7 +14,6 @@ FROM openjdk:8-jre-bullseye
 VOLUME /tmp
 MAINTAINER NUZAR_CLOUD
 
-ENV SAMPLE_BUILD_MODE=dockerfile
 LABEL PROJECT_NAME=${project.artifactId} \
       PROJECT=${project.artifactId}
 
@@ -25,7 +24,7 @@ ADD target/${project.artifactId}.jar /
 
 # 端口号
 EXPOSE 20880
-# 指定JVM启动参数
+# 指定JVM启动参数，可以通过deploy的yml指定
 ENV PROFILES_OPTS=""
 
 ENTRYPOINT [ "sh", "-c","java $PROFILES_OPTS  -jar /${project.artifactId}.jar"]
@@ -73,9 +72,11 @@ ENTRYPOINT [ "sh", "-c","java $PROFILES_OPTS  -jar /${project.artifactId}.jar"]
 </build>
 ```
 
-* 生成镜像 创建deploy.bat 内容如下
+* 生成镜像 创建deploy.bat 内容如下，表示 执行打包，生成镜像，推送镜像
 
+```bat
 @echo off
 call mvn install
 call mvn docker:build -f pom.xml
 call mvn docker:push -f pom.xml
+```

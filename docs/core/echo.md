@@ -2,25 +2,53 @@
 
 ## nuzar-echo-starter
 
+回显功能用于填充和丰富接口返回数据，eg. Product默认返回brand字段，我们可以通过Echo回显功能将brand字段的值翻译为对应的中文名称，另外也
+可以通过此功能完成马赛克功能，默认提供手机号、身份证、密码、地址的马赛克功能
+
+## echo数据源
+
+考虑到性能问题，目前echo数据都提前存放与redis中，可以通过实现PreEchoCacheSupplier并将其注入为Bean的方式，可以在程序启动时将需要缓存的数据载入redis中去
+
+```java
+@Bean
+public PreEchoCacheSupplier preEchoCacheSupplier(SysUsersService usersService) {
+    return () -> {
+        List<EchoCacheObject> list = new ArrayList<>();
+        List<SysUsers> allUser = usersService.list();
+        list.addAll(allUser.stream().
+                map(t ->
+                        new EchoCacheObject(t.getTenantId(), Constants.Domains.USER, t.getId(), t.getName()))
+                .collect(Collectors.toList()));
+        list.addAll(allUser.stream().
+                map(t ->
+                        new EchoCacheObject(null, Constants.Domains.USER, t.getId(), t.getName()))
+                .collect(Collectors.toList()));
+        return list;
+    };
+}
+```
+
 ## 配置
 
 默认echo为关闭状态需要手动打开
 
-本地缓存使用ThreadLocal配置，仅在线程中使用，可以通过EchoContextHolder上下文存储
-
-Redis缓存默认过期时间为300S，redis缓存默认启用
+echo使用两层缓存，redis和本地缓存
 
 ```yml
 nuzar:
   cloud:
     echo:
       enabled: true
+      # 是否启动回显功能 默认为false 需要手动开启
       redis:
+        expire: 1800
+      # 配置redis缓存过期时间
+      multi-env: true
+      # 是否启动多租户环境模式，适用于多租户缓存隔离
+      local:
         expire: 300
+      # 缓存分两层，此处为本地缓存过期时间，使用caffeine
 ```
-
-回显功能用于填充和丰富接口返回数据，eg. Product默认返回brand字段，我们可以通过Echo回显功能将brand字段的值翻译为对应的中文名称，另外也
-可以通过此功能完成马赛克功能，默认提供手机号、身份证、密码、地址的马赛克功能
 
 * `@Echo`
 

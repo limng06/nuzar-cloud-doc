@@ -21,7 +21,7 @@ spring:
 
 创建一个新maven项目，使用pom管理，可以使用lombok用于简化代码编写
 
-* lombok请自行引入，scope请选择provided，尽在编译测试时生效
+* lombok请自行引入，scope请选择compile，仅在编译测试时生效
 
 在`pom.xml`引入核心包
 
@@ -38,10 +38,16 @@ spring:
         <artifactId>nuzar-core</artifactId>
         <version>${nuzar.cloud.version}</version>
     </dependency>
+        <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>RELEASE</version>
+        <scope>compile</scope>
+    </dependency>
 </dependencies>
 ```
 
-添加`Product.java`
+添加`Product.java`，请继承基类BaseEntity
 
 ```java
 @Data
@@ -70,7 +76,7 @@ public class Product extends BaseEntity implements Serializable {
 }
 ```
 
-添加`ProductMapper.java`，CommonMapper中包含了常用的增删改查操作
+添加`ProductMapper.java`，CommonMapper中包含了常用的增删改查操作和简单JOIN表操作
 
 ```java
 @Mapper
@@ -92,5 +98,22 @@ public interface ProductService extends CommonService<Product> {
 @Service
 public class ProductServiceImpl extends CommonServiceImpl<ProductMapper, Product> implements ProductService {
 
+}
+```
+
+使用简单JOIN表关联查询, CommonMapper扩展了CommonJoinMapper接口，CommonJoinMapper中包含有JOIN查询接口
+
+```java
+/**
+* 
+*/
+public ProductInfo getProductInfo(String id) {
+    JoinLambdaWrapper<Product> wrapper = JoinWrappers.lambdaJoin();
+    wrapper.selectAll(Product.class)
+            .select(ProductExtend::getExtendName)
+            .leftJoin(ProductExtend.class, ProductExtend::getProductId, Product::getId)
+            .eq(Product::getId, id);
+    ProductInfo info = baseMapper.selectJoinOne(ProductInfo.class, wrapper);
+    return info;
 }
 ```

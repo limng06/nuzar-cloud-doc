@@ -63,7 +63,7 @@
 </build>
 ```
 
-添加`application.yml`，以下为最小配置
+添加`application.yml`，以下为最小配置，创建一个最简单的程序
 
 ```yml
 spring:
@@ -136,3 +136,7 @@ public class MiniApplication {
 ```
 
 启动程序即可调用接口
+
+## 实例
+
+更多实例请参考[nuzar-cloud-example](https://gitee.com/mad_max621/nuzar-cloud-example.git)下的**0.quickstart**
