@@ -2,6 +2,21 @@
 
 适当使用策略模式可以有效减小代码规模、优化目录结构，使代码功能一目了然。
 
+```xml
+<!-- 包含标签和接口等 -->
+<dependency>
+    <groupId>com.nuzar</groupId>
+    <artifactId>nuzar-business</artifactId>
+    <version>${nuzar.cloud.version}</version>
+</dependency>
+<!-- 包含实现自动配置等 -->
+<dependency>
+    <groupId>com.nuzar</groupId>
+    <artifactId>nuzar-business-starter</artifactId>
+    <version>${nuzar.cloud.version}</version>
+</dependency>
+```
+
 ## 1.提炼抽象接口
 
 使用工厂模式的方式获取符合策略的实现类

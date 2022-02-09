@@ -129,6 +129,14 @@ public ProductInfo getProductInfo(String id) {
 调用方式1 CommonService.save(T t) 方法会自动检查
 调用方式2 通过CommonService.checkIfExist(T t)主动检查
 
+```java
+public class Product{
+    @TableId
+    @UniqueKey
+    private String id;
+}
+```
+
 ```json
 {
     "time_stamp": "2022-02-09 14:40:45",
@@ -146,6 +154,7 @@ public ProductInfo getProductInfo(String id) {
 
 1. 使用@Validated校验
 2. ValidatorUtils.validate(product);
+3. 使用group对校验规则做分组
 
 ```java
 public T create(@RequestBody @Validated T entity) {
@@ -158,6 +167,7 @@ public T create(@RequestBody @Validated T entity) {
 public void valid() {
     Product product = new Product();
     ValidatorUtils.validate(product);
+    ValidatorUtils.validate(product, group1.class);
 }
 ```
 
@@ -167,6 +177,7 @@ public void valid() {
     */
 @Size(max = 20)
 @NotEmpty(message = "品牌不能为空")
+@NotEmpty(message = "品牌2不能为空", group = Group1.class)
 private String brand;
 ```
 
