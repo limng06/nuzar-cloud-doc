@@ -1,6 +1,7 @@
 # 快速开始
 
-安装 `maven` 工具，并配置私服地址。
+安装 [maven3.x](https://maven.apache.org/download.cgi) 工具，并配置私服地址。
+安装[git](https://www.git-scm.com/download/win)工具。
 
 ```xml
 <servers>
@@ -19,6 +20,21 @@
   </mirror>
 <mirrors>
 ```
+
+## 包资源清单
+
+nuzar-core
+nuzar-business
+
+nuzar-web-starter(回显)
+nuzar-redis-starter(缓存、锁)
+nuzar-echo-starter(回显)
+nuzar-apm-starter(监控，未完)
+nuzar-consul-starter(consul服务发现、配置
+nuzar-nacos-starter(nacos服务发现、配置)
+nuzar-xxl-starter(xxl调度)
+nuzar-business-starter(设计模式)
+nuzar-stream-starter(未完)
 
 ## 初始化项目
 
