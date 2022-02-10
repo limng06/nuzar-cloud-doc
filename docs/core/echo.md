@@ -126,6 +126,29 @@ public class BrandEchoServiceImpl implements BrandEchoService {
 }
 ```
 
+使用`AbstractCacheEchoService`，提供本地缓存功能，eg如下
+
+```java AbstractCacheEchoService
+@Component
+@AllArgsConstructor
+public class PubVoyageEchoServiceImpl extends AbstractCacheEchoService<String, String> implements PubVoyageEchoService {
+    private final AcceptanceApi acceptanceApi;
+
+    @Override
+    public String echo(String s) {
+        List<CommonDict> list = getFromCache("voyage", () -> acceptanceApi.queryAllPort());
+        if (list == null) {
+            return null;
+        }
+        Optional<CommonDict> first = list.stream().filter(t -> t.getId().equals(s)).findFirst();
+        if (first.isPresent()) {
+            return first.get().getName();
+        }
+        return null;
+    }
+}
+```
+
 添加 `ProductController.java`
 
 ```java

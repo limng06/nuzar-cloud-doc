@@ -1,3 +1,5 @@
+# 目录
+
 * 入门
   * [快速开始](guid/quickstart.md)
   * [配置](guid/config.md)
@@ -10,6 +12,8 @@
   * [回显](core/echo.md)
   * [日志](core/log.md)
   * [断路器](core/circuitbreaker.md)
+  * [测试](core/test.md)
+  * [多线程](core/thread.md)
 
 * 设计模式
   * [策略模式](biz/stratege.md)
