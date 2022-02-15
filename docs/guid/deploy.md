@@ -76,7 +76,7 @@ ENTRYPOINT [ "sh", "-c","java $PROFILES_OPTS  -jar /${project.artifactId}.jar"]
 
 ```bat
 @echo off
-call mvn install
+call mvn clean install
 call mvn docker:build -f pom.xml
 call mvn docker:push -f pom.xml
 ```
