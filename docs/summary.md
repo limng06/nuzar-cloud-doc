@@ -27,6 +27,7 @@
   * [授权](auth/authrization.md)
 
 * 扩展
+  * [SWAGGER](extend/swagger.md)
   * [Redis](extend/redis.md)
   * [Nacos](extend/nacos.md)
   * [Consul](extend/consul.md)
