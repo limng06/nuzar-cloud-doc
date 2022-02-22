@@ -14,6 +14,7 @@
   * [断路器](core/circuitbreaker.md)
   * [测试](core/test.md)
   * [多线程](core/thread.md)
+  * [事件](core/stream.md)
 
 * 设计模式
   * [策略模式](biz/stratege.md)

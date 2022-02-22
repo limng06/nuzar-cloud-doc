@@ -27,6 +27,8 @@ public class ProductController extends CommonController<Product, ProductService,
 
 如果使用String类型返回，默认会走mvc模式，如果需要返回json格式，请指定`@GetMapping(value = "/string", produces = {"application/json"})`
 
+注意如果使用String类型，如果指定了json格式返回，那么会直接返回该string，不会做第二次封装为MassResult
+
 默认所有的其它非MassResult最后返回结果都会被封装为MassResult类型
 
 ## 异常

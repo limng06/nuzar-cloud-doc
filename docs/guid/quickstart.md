@@ -34,7 +34,7 @@ nuzar-consul-starter(consul服务发现、配置
 nuzar-nacos-starter(nacos服务发现、配置)
 nuzar-xxl-starter(xxl调度)
 nuzar-business-starter(设计模式)
-nuzar-stream-starter(未完)
+nuzar-stream-starter(事件传递v1)
 
 ## 初始化项目
 
