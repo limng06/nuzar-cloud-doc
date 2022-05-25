@@ -25,3 +25,7 @@
 ## 常用工具
 
 [JAVA_GUID](https://javaguide.cn)
+
+## demo参考
+
+[NUZAR_CLOUD_EXAMPLE](https://gitee.com/mad_max621/nuzar-cloud-example)

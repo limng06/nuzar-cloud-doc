@@ -16,7 +16,7 @@
       <id>public</id>
       <mirrorOf>*</mirrorOf>
       <name>Public Repositories</name>
-      <url>http://10.122.0.56:8081/repository/maven-public/</url>
+      <url>http://10.126.0.82:8081/repository/maven-public/</url>
   </mirror>
 <mirrors>
 ```
