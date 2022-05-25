@@ -27,9 +27,9 @@ spring:
 
 ```xml
 <properties>
-    <nuzar.cloud.version>2.6.1-SNAPSHOT</nuzar.cloud.version>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <nuzar.cloud.version>2.6.7-SNAPSHOT</nuzar.cloud.version>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
 </properties>
 
 <dependencies>

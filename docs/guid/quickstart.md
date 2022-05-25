@@ -23,18 +23,25 @@
 
 ## 包资源清单
 
-nuzar-core
+nuzar-core（核心包）
+
 nuzar-business
 
-nuzar-web-starter(回显)
-nuzar-redis-starter(缓存、锁)
-nuzar-echo-starter(回显)
-nuzar-apm-starter(监控，未完)
-nuzar-consul-starter(consul服务发现、配置
-nuzar-nacos-starter(nacos服务发现、配置)
-nuzar-xxl-starter(xxl调度)
-nuzar-business-starter(设计模式)
-nuzar-stream-starter(事件传递v1)
+nuzar-web-starter(回显 starter组件)
+
+nuzar-redis-starter(缓存、锁 starter组件)
+
+nuzar-echo-starter(回显 starter组件)
+
+nuzar-consul-starter(consul服务发现、配置 starter组件）
+
+nuzar-nacos-starter(nacos服务发现、配置 starter组件)
+
+nuzar-xxl-starter(xxl调度 starter组件)
+
+nuzar-business-starter(设计模式 starter组件)
+
+nuzar-stream-starter(事件传递v1 starter组件)
 
 ## 初始化项目
 
@@ -44,9 +51,9 @@ nuzar-stream-starter(事件传递v1)
 
 ```xml
 <properties>
-    <nuzar.cloud.version>2.6.1-SNAPSHOT</nuzar.cloud.version>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <nuzar.cloud.version>2.6.7-SNAPSHOT</nuzar.cloud.version>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
 </properties>
 
 <dependencies>
@@ -62,7 +69,7 @@ nuzar-stream-starter(事件传递v1)
         <plugin>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-maven-plugin</artifactId>
-            <version>2.5.7</version>
+            <version>2.6.7</version>
             <executions>
                 <execution>
                     <goals>
@@ -126,7 +133,7 @@ public class MainController {
      */
     @GetMapping("/exception")
     public Student exception() {
-        throw BizExceptionGenerator.generateBizException(new BizExceptionDef("ERROR-001", "呵呵 发生了 一场"));
+        throw BizExceptionGenerator.generateBizException(new BizExceptionDef("ERROR-001", "呵呵 发生了 一场意外"));
     }
 
     @Data

@@ -1,8 +1,9 @@
 # 日志
 
-## nuzar-apm-starter
+## nuzar-logging-starter
 
 代码中的日志请统一使用SLF4J框架，默认使用spring-boot的logback日志实现
+如果需要可使用logback的appender组件配合elk使用
 
 ## 接口日志扩展
 
